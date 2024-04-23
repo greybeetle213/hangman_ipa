@@ -1,0 +1,70 @@
+.wrongLetters {
+    font-size: xx-large;
+    text-decoration: line-through; /*make the line where wrong letters go crossed out*/
+}
+.word {
+    font-size: 5vh; /*make the place where the correctly guessed letters are have a large font size*/
+} 
+.hangmanCanvas {
+    display: inline-block; /*make the canvas go next to the div*/
+}
+.vowelCanvas{
+    background-color: white;
+}
+.keyboard {
+    text-align: center;
+    background-color: black;
+    margin: 1vh;
+    padding: 1vh;
+    width: fit-content;
+    button {
+        margin: 0px;
+        padding: 0px;
+        font-size: 7vh;
+        min-width: 7vh;
+        color: black;
+        background-color: white;
+    }
+}
+.mainDiv {
+    float: left;
+    top: 0%;
+    border: 5px outset black; /*put a border around the canvas, input, wrongletters, and word to be guessed*/
+    width: min-content;
+}
+.rightDiv{
+    
+    float: right;
+    text-align: right; 
+    width: min-content;
+}
+table {
+    button {
+        margin: 0px;
+        padding: 0px;
+        font-size: 2vw;
+        min-width: 2vw;
+        background-color: white;
+        color: black;
+        border: black;
+    }
+    background-color: white;
+    color: black;
+    font-family: arial, sans-serif;
+    display: inline-block;
+    border-collapse: collapse;
+}
+.dipthongButton {
+    margin: 2px;
+    padding: 0px;
+    font-size: 2vw;
+    min-width: 5vw;
+    background-color: white;
+    color: black;
+    border: 5px solid black;
+}
+td, th {
+    border: 5px solid black;
+    text-align: left;
+    padding: 8px;
+}
