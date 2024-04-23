@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman IPA</title>
+    <script src="../WordListBetter.js"></script>
+    <script src="script.js"></script> <!-- import the script -->
+    <link rel="stylesheet" href="style.css"> <!-- import the stylesheet -->
+</head>
+    <body onload="init()" style="white-space: nowrap; font-family: arial, sans-serif;"> <!--define the body tag so that when it loads the init function will run-->
+        <div class="mainDiv"> <!--make the border-->
+            <canvas id="hangmanCanvas" class="hangmanCanvas"></canvas> <!--define the canvas-->
+            <div>
+                <span id="word" class="word"></span><!--define the place where correctly guessed letters will appear--><br>
+                <span id="name" style="font-size: 4vh;"></span><span style="font-size: 4vh;" id="winLossRatio">0-0</span> <!--make the place where the score will display-->
+                <button onclick="replay()" id="reload"  style="font-size: 3vw; width: fit-content; display:none;">Play Again</button> <!--make the play again button--><br>
+            </div>
+        </div>
+        <div class="rightDiv">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>
+                        Labial
+                    </th>
+                    <th>
+                        Dental
+                    </th>
+                    <th>
+                        Alveolar
+                    </th>
+                    <th>
+                        Post-Alveolar
+                    </th>
+                    <th>
+                        Palatal
+                    </th>
+                    <th>
+                        Velar
+                    </th>
+                    <th>
+                        Glottal
+                    </th>
+                </tr>
+                <tr>
+                    <th>Nasal</th>
+                    <td><button id="mButton" onclick="main('m')">m</button></td>
+                    <td></td>
+                    <td><button id="nButton" onclick="main('n')">n</button></td>
+                    <td></td>
+                    <td></td>
+                    <td><button id="NButton" onclick="main('N')">ŋ</button>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Plosive</th>
+                    <td><button id="pButton" onclick="main('p')">p</button><button id="bButton" onclick="main('b')">b</button></td>
+                    <td></td>
+                    <td><button id="tButton" onclick="main('t')">t</button><button id="dButton" onclick="main('d')">d</button></td>
+                    <td></td>
+                    <td></td>
+                    <td><button id="kButton" onclick="main('k')">k</button><button id="gButton" onclick="main('g')">g</button></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Affricate</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button id="JButton" onclick="main('J')">t͡ʃ</button><button id="_Button" onclick="main('_')">d͡ʒ</button></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Fricative</th>
+                    <td><button id="fButton" onclick="main('f')">f</button><button id="vButton" onclick="main('v')">v</button></td>
+                    <td><button id="TButton" onclick="main('T')">θ</button><button id="DButton" onclick="main('D')">ð</button></td>
+                    <td><button id="sButton" onclick="main('s')">s</button><button id="zButton" onclick="main('z')">z</button></td>
+                    <td><button id="SButton" onclick="main('S')">ʃ</button><button id="ZButton" onclick="main('Z')">ʒ</button></td>
+                    <td></td>
+                    <td></td>
+                    <td><button id="hButton" onclick="main('h')">h</button></td>
+                </tr>
+                <tr>
+                    <th>Approximant</th>
+                    <td></td>
+                    <td></td>
+                    <td><button id="lButton" onclick="main('l')">l</button></td>
+                    <td><button id="rButton" onclick="main('r')">ɹ</button></td>
+                    <td><button id="jButton" onclick="main('j')">j</button></td>
+                    <td><button id="wButton" onclick="main('w')">w</button></td>
+                    <td></td>
+                </tr>
+            </table>
+            <br>
+            <div style="border: 5px solid black; text-align: center;">
+            <canvas id="vowelCanvas" class="vowelCanvas"></canvas>            
+            <div style="display: inline-block;">
+                <button id="5Button" onclick="main('5')" class="dipthongButton">ɐ͡ʉ<br><span style="font-variant: small-caps;">goat</span></button><br>
+                <button id="6Button" onclick="main('6')" class="dipthongButton">æ͡ʉ<br><span style="font-variant: small-caps;">mouth</span></button><br>
+                <button id="1Button" onclick="main('1')" class="dipthongButton">æ͡e<br><span style="font-variant: small-caps;">face</span></button><br>
+                <button id="2Button" onclick="main('2')" class="dipthongButton">ɑ͡e<br><span style="font-variant: small-caps;">price</span></button><br>
+                <button id="4Button" onclick="main('4')" class="dipthongButton">o͡e<br><span style="font-variant: small-caps;">choice</span></button><br>
+                <button id="7Button" onclick="main('7')" class="dipthongButton">i͡ə<br><span style="font-variant: small-caps;">near</span></button><br>
+                <button id="8Button" onclick="main('8')" class="dipthongButton">e͡ə<br><span style="font-variant: small-caps;">sqaure</span></button><br>
+                <button id="9Button" onclick="main('9')" class="dipthongButton">ʉ͡ə<br><span style="font-variant: small-caps;">cure</span></button>
+            </div>
+            </div>
+            <!-- <image src="monifthongs.svg" style="width: 40%;"></image>
+            <image src="diphthongs.png" style="width: 40%;"></image> -->
+        </div>
+            <!-- <button id="EButton" onclick="main('E')">e</button>        
+            <button id="uButton" onclick="main('u')">ʉ</button>
+            <button id="UButton" onclick="main('U')">ʊ</button>
+            <button id="VButton" onclick="main('V')">ɐ</button>
+            <button id="iButton" onclick="main('i')">iː</button>
+            <button id="@Button" onclick="main('@')">ə</button>
+            <button id="$Button" onclick="main('$')">oː</button>
+            <button id="3Button" onclick="main('3')">ɵː</button>
+            <button id="QButton" onclick="main('Q')">ɒ</button>
+            <button id="#Button" onclick="main('#')">ɐː</button>
+            <button id="{Button" onclick="main('{')">ɛ</button>
+            <button id="IButton" onclick="main('I')">ɘ</button> -->
+            <!-- <button id="1Button" onclick="main('1')">æ͡e</button>
+            <button id="2Button" onclick="main('2')">ɑ͡e</button>
+            <button id="4Button" onclick="main('4')">o͡e</button>
+            <button id="5Button" onclick="main('5')">ɐ͡ʉ</button>
+            <button id="6Button" onclick="main('6')">æ͡ʉ</button>
+            <button id="7Button" onclick="main('7')">i͡ə</button>
+            <button id="8Button" onclick="main('8')">e͡ə</button>
+            <button id="9Button" onclick="main('9')">ʉ͡ə</button> -->
+    </body>
+</html>
